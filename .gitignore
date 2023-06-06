@@ -1,7 +1,7 @@
 #Client Token And Logs
 client.token
 softpets.log
-
+bot.conf
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -31,6 +31,8 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+/yiffs/__pycache__
+/bot-env/lib64
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
