@@ -7,7 +7,7 @@ import configparser
 config = configparser.ConfigParser()
 config.read("bot.conf")
 TOKEN = config.get("Bot", "TOKEN")
-MY_GUILD = discord.Object(907855215137554442)
+MY_GUILD = discord.Object(1192534770622681230)
 
 intents = discord.Intents.default()
 intents.message_content = True
