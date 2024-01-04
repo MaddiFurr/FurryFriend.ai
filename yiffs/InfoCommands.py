@@ -8,9 +8,9 @@ class info(apc.Group):
 
     @apc.command()
     async def hello(self, interaction: discord.Interaction):
-        await interaction.response.send_message('Hello ya cutie! {}'.format(interaction.author.mention))
+        await interaction.response.send_message('Hello {}! Ya cutie!'.format(interaction.user.mention))
 
     @apc.command()
     async def version(self, interaction: discord.Interaction):
         """tells you what version of the bot software is running."""
-        await interaction.response.send_message(' Bot Running: V0.0.1')
+        await interaction.response.send_message(' Bot Running: DEV 0.0.1')
