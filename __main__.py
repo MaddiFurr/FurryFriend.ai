@@ -24,6 +24,6 @@ bot.tree.add_command(InfoCommands.info(bot), guild=MY_GUILD)
 @bot.event
 async def on_ready():
     await bot.tree.sync(guild=MY_GUILD)
-    print("Bot is ready!")
+    print("Bot is ready! {} {}".format(bot.user.name,bot.user.id))
 
 bot.run(TOKEN)
