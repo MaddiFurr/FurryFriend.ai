@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import yiffs.InfoCommands as InfoCommands
+import yiffs.InteractCommands as InteractCommands
 import configparser
 
 # Load bot configuration from bot.conf
@@ -16,6 +17,7 @@ bot = commands.Bot(command_prefix=".",intents=intents)
 
 ## Add the commands to the bot
 bot.tree.add_command(InfoCommands.info(bot), guild=MY_GUILD)
+bot.tree.add_command(InteractCommands.interact(bot), guild=MY_GUILD)
 
 ## Once the bot is ready, sync the commands to the guild, and print a ready message
 @bot.event
