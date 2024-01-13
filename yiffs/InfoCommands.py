@@ -1,5 +1,7 @@
 import discord
 from discord import app_commands as apc
+
+
 class info(apc.Group):
     """Manage general commands"""
     def __init__(self, bot: discord.ext.commands.Bot):
