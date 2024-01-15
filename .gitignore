@@ -176,3 +176,4 @@ share/
 pyvenv.cfg
 bin/
 lib64/
+run.ps1

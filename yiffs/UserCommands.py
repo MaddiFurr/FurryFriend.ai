@@ -39,6 +39,7 @@ class user(apc.Group):
                 break
 
         await interaction.response.send_message(embed=e, ephemeral=False)
+        print("Status command ran by {} ({}) on user {} ({})".format(interaction.user.name,interaction.user.id,member.name,member.id))
 
     @apc.command()
     async def account(self, interaction: discord.Interaction, user: discord.User):
@@ -59,3 +60,4 @@ class user(apc.Group):
         e.add_field(name='Profile Picture', value=user.avatar)
         e.set_image(url=str(user.avatar))
         await interaction.response.send_message("Heres is <@{}>'s info!".format(user.id), embed=e, ephemeral=False)
+        print("Account command ran by {} ({}) on user {} ({})".format(interaction.user.name,interaction.user.id,member.name,member.id))
