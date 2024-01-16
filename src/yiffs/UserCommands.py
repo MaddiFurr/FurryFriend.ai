@@ -7,7 +7,7 @@ class user(apc.Group):
         super().__init__()
         self.bot = bot
     
-    
+    # Get a user's status and activities
     @apc.command()
     async def status(self, interaction: discord.Interaction, user: discord.User):
         """Get a user's status and activities"""
@@ -41,7 +41,7 @@ class user(apc.Group):
 
         await interaction.response.send_message(embed=e, ephemeral=False)
         print("Status command ran by {} ({}) on user {} ({})".format(interaction.user.name,interaction.user.id,member.name,member.id))
-
+    # Get a user's account information
     @apc.command()
     async def account(self, interaction: discord.Interaction, user: discord.User):
         """Get a user's account information"""
@@ -63,7 +63,7 @@ class user(apc.Group):
         e.set_image(url=str(user.avatar))
         await interaction.response.send_message("Heres is <@{}>'s info!".format(user.id), embed=e, ephemeral=False)
         print("Account command ran by {} ({}) on user {} ({})".format(interaction.user.name,interaction.user.id,member.name,member.id))
-        
+    # Get a user's permissions
     @apc.command()
     async def permissions(self, interaction: discord.Interaction, user: discord.User):
         """Get a user's permissions"""

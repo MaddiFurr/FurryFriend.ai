@@ -2,6 +2,7 @@ import discord
 from discord import Webhook
 from .BotService import bot
 
+# Send a webhook message to the channel provided and attempt to mimic the sender
 async def send_webhook_message(server, channel, sender: discord.User, message: str):
     webhook_name = "FurryFriendAI_Webhook"
     # Get the list of webhooks in the channel
