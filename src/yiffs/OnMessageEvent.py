@@ -5,6 +5,7 @@ from ..services.WebhookService import send_webhook_message
 async def on_message(message):
     if message.author == bot.user:
         return
+    
     ## Replace Twitter Links with TwittPR Links
     if "https://twitter.com" in message.content:
         await send_webhook_message(message.guild, message.channel, message.author, message.content.replace("https://twitter.com/","https://twittpr.com/"))
