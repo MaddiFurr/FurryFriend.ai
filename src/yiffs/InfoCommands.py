@@ -1,6 +1,6 @@
 import discord
 from discord import app_commands as apc
-
+from ..services.BotService import bot
 
 class info(apc.Group):
     """Manage general commands"""
@@ -19,3 +19,11 @@ class info(apc.Group):
         """Tells you what version of the bot software is running."""
         await interaction.response.send_message('Bot Running: DEV 0.0.1', ephemeral=True)
         print("Version command ran by {} ({})".format(interaction.user.name,interaction.user.id))
+        
+    @apc.command()
+    async def botstatus(self, interaction: discord.Interaction, newstatus: str):
+        """Change the bot's status"""
+        await bot.change_presence(activity=discord.Game(name=newstatus), status=discord.Status.online)
+        await interaction.response.send_message('Bot status changed to:\n`{}`'.format(newstatus), ephemeral=True)
+        print("Bot Status command ran by {} ({}). Changed status to: ".format(interaction.user.name,interaction.user.id, newstatus))
+        
