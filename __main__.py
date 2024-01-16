@@ -5,7 +5,7 @@ from src.services.BotService import bot
 import configparser
 
 # Set the guilds
-guilds = [discord.Object(id) for id in ["1192534770622681230"]] #, "917618961124851732"
+guilds = [discord.Object(id) for id in ["907855215137554442"]] #, "917618961124851732"
 
 # Add the commands to the bot
 for guild_id in guilds:
