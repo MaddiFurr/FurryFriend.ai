@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
-from src.yiffs import OnReadyEvent, OnMessageEvent, InfoCommands, InteractCommands, UserCommands
+from src.yiffs import InfoCommands, InteractCommands, UserCommands
+from src.yiffs import OnReadyEvent, OnMessageEvent
 from src.services.BotService import bot
 from src.services.SettingsService import settings
 
