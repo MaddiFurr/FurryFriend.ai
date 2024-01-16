@@ -2,6 +2,7 @@
 client.token
 softpets.log
 bot.conf
+live_bot.conf
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

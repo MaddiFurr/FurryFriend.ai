@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from src.yiffs import InfoCommands, InteractCommands, UserCommands
+from src.yiffs import InfoCommands, InteractCommands, UserCommands, DefineSettings
 from src.yiffs import OnReadyEvent, OnMessageEvent
 from src.services.BotService import bot
 from src.services.SettingsService import settings
@@ -12,6 +12,7 @@ guild = discord.Object(id=settings.GUILD)
 bot.tree.add_command(InfoCommands.info(bot), guild=guild)
 bot.tree.add_command(InteractCommands.interact(bot), guild=guild)
 bot.tree.add_command(UserCommands.user(bot), guild=guild)
+bot.tree.add_command(DefineSettings.settings(bot), guild=guild)
 
 ## Run the bot
 if __name__ == "__main__":

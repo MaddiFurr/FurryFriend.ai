@@ -12,4 +12,6 @@ async def on_ready():
     await bot.tree.sync(guild=guild)
     permissions = discord.Intents.all()
     url = f"https://discord.com/oauth2/authorize?client_id={bot.user.id}&permissions={permissions.value}&scope=bot"
-    print(f"Bot is ready! Add it to your server using this link: {url}")
+    print(f"Bot is ready! Now in {len(bot.guilds)} guilds.")
+    for server in bot.guilds:
+        print(f"Guild name: {server.name}")
