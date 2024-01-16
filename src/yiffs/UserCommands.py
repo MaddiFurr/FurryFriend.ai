@@ -9,7 +9,8 @@ class user(apc.Group):
     
     
     @apc.command()
-    async def status(self, interaction: discord.Interaction, user: discord.User = None):
+    async def status(self, interaction: discord.Interaction, user: discord.User):
+        """Get a user's status and activities"""
         user = user or interaction.user
         guild = interaction.guild
         member = guild.get_member(user.id)
@@ -43,6 +44,7 @@ class user(apc.Group):
 
     @apc.command()
     async def account(self, interaction: discord.Interaction, user: discord.User):
+        """Get a user's account information"""
         user = user or interaction.user
         guild = interaction.guild
         member = guild.get_member(user.id)
