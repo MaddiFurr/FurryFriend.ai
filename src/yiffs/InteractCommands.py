@@ -8,7 +8,8 @@ class interact(apc.Group):
     def __init__(self, bot: discord.ext.commands.Bot):
         super().__init__()
         self.bot = bot
-
+    
+    # The pet command
     @apc.command()
     async def pet(self, interaction: discord.Interaction, user: discord.User):
         """Pet a user!"""
@@ -19,7 +20,7 @@ class interact(apc.Group):
         
         # Check if the user is trying to pet the bot
         if user.id == bot.user.id:
-            await interaction.response.send_message("You can't pet me ya silly!", ephemeral=True)
+            await interaction.response.send_message("You can't pet me ya silly!", ephemeral=False)
             return
         
         # Pet the user specified
