@@ -17,13 +17,15 @@ GUILD = config.get("Bot", "GUILD")
 MOD = config.get("Bot", "MOD")
 ADMIN = config.get("Bot", "ADMIN")
 STATUS = config.get("Bot", "STATUS")
+LOG_CHANNEL = config.get("Bot", "LOG_CHANNEL")
 
 class settings:
-    def __init__(self, TOKEN, MOD, ADMIN, GUILD, STATUS):
+    def __init__(self, TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL):
         self.TOKEN = TOKEN
         self.MOD = MOD
         self.ADMIN = ADMIN
         self.GUILD = GUILD
         self.STATUS = STATUS
+        self.LOG_CHANNEL = LOG_CHANNEL
 
-settings = settings(TOKEN, MOD, ADMIN, GUILD, STATUS)
+settings = settings(TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL)
