@@ -11,9 +11,9 @@ class settings(apc.Group):
         self.bot = bot
     
     # Say hello to the bot!
-    @apc.command()
-    async def logchannel(self, interaction: discord.Interaction, channel: discord.TextChannel):
-        """Change the guild's log channel"""
-        user = interaction.user
-        await update_logchannel(interaction, user, channel)
+    #@apc.command()
+    #async def logchannel(self, interaction: discord.Interaction, channel: discord.TextChannel):
+    #    """Change the guild's log channel"""
+    #    user = interaction.user
+    #    await update_logchannel(interaction, user, channel)
         
