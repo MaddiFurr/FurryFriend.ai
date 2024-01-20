@@ -1,5 +1,5 @@
-from ..services.BotService import bot
-from ..services.WebhookService import send_webhook_message
+from ...services.BotService import bot
+from ...services.WebhookService import send_webhook_message
 
 @bot.event
 async def on_message(message):

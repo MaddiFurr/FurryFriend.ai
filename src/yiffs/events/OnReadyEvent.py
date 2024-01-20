@@ -1,6 +1,6 @@
 import discord
-from ..services.BotService import bot
-from ..services.SettingsService import settings
+from ...services.BotService import bot
+from ...services.SettingsService import settings
 
 
 guild = discord.Object(id=settings.GUILD)

@@ -1,6 +1,6 @@
 import discord
-from ..services.BotService import bot
-from ..services.SettingsService import settings
+from ...services.BotService import bot
+from ...services.SettingsService import settings
 import time
 
 ## On a message edit event, send an embed to the log channel

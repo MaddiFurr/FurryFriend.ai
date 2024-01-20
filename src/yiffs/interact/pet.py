@@ -7,7 +7,7 @@ import random
 async def pet(interaction: discord.Interaction, user: discord.User):
         """Pet a user!"""
         
-        intensity = random.choice(["gently", "roughly", "hard", "softly", "playfully", "lovingly", "tenderly", "affectionately", "firmly", "slowly", "quickly", "passionately",""])
+        intensity = random.choice(["gently", "roughly", "softly", "playfully", "lovingly", "tenderly", "affectionately", "firmly", "slowly", "quickly", "passionately",""])
         pet_type = random.choice(["pets", "rubs", "strokes", "caresses", "pats"])
         
         # Check if the user is trying to pet themselves
