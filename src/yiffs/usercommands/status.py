@@ -17,7 +17,9 @@ async def status(interaction: discord.Interaction, user: discord.User):
         status = str(member.status)
 
         # Fetch user activities
-        activities = '\n---\n'.join([str(activity) for activity in member.activities])
+        # Fetch user activities
+        # Fetch user activities
+        activities = '\n---\n'.join([f"{activity.type.name}: {activity.name}" if isinstance(activity, discord.Spotify) else f"{activity.type.name}: {activity.name}, URL: {activity.url or 'No URL'}" for activity in member.activities])
 
         # Create an embed message
         e = discord.Embed(title=f"{member.display_name}'s Status and Activities", description=None, color=member.accent_color)
@@ -33,7 +35,7 @@ async def status(interaction: discord.Interaction, user: discord.User):
                 e.add_field(name='Artist', value=', '.join(spotify.artists), inline=False)
                 e.add_field(name='Album', value=spotify.album, inline=False)
                 e.add_field(name='Started Listening', value=spotify.created_at.strftime("%H:%M:%S"), inline=False)
-                e.add_field(name='Duration', value=str(spotify.duration), inline=False)
+                e.add_field(name='Duration', value=str(int(spotify.duration)), inline=False)
                 e.set_image(url=spotify.album_cover_url)
                 break
 
