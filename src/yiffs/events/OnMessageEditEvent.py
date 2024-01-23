@@ -6,10 +6,15 @@ import time
 ## On a message edit event, send an embed to the log channel
 @bot.event
 async def on_message_edit(message_before, message_after):
+    # Don't log webhook messages
     if message_before.webhook_id:
         return
+    
+    # This was added because for some reason, a log was being created when a message with an embed
+    # Because Ciscord thinks that the message was edited, even though it wasn't
     if message_after.content == message_before.content:
         return
+    
     epoch = int(time.time())
     e = discord.Embed(title="Message Edited", description=f"Message edited in {message_before.channel.mention}", color=0xf1c40f)
     e.add_field(name="Action Severity", value="1 - Low", inline=False)
