@@ -7,7 +7,7 @@ import random
 async def hug(interaction: discord.Interaction, user: discord.User):
         """Hug a user!"""
         
-        intensity = random.choice(["tightly", "tenderly", "lovingly", "softly", "affectionately", "firmly", "gently", ""])
+        intensity = random.choice(["tightly", "tenderly", "lovingly", "softly", "affectionately", "firmly", "gently"])
         hug_type = random.choice(["hugs", "embraces", "squeezes", "cuddles", "snuggles", "holds", "cradles"])
         
         # Check if the user is trying to pet themselves

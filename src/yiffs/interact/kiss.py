@@ -7,7 +7,7 @@ import random
 async def kiss(interaction: discord.Interaction, user: discord.User):
         """Kiss a user!"""
         
-        intensity = random.choice(["tenderly", "lovingly", "softly", "affectionately", "passionately", "gently", ""])
+        intensity = random.choice(["tenderly", "lovingly", "softly", "affectionately", "passionately", "gently"])
         kiss_type = random.choice(["kisses", "smooches", "pecks"])
         
         # Check if the user is trying to pet themselves
