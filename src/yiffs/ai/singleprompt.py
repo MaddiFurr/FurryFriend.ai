@@ -20,6 +20,7 @@ async def single_prompt(interaction: discord.Interaction, prompt: str):
         channel = interaction.channel
         # Send a follow-up message
         await interaction.followup.send('The response was too long to send in one message. Sending in multiple messages...')
+        await asyncio.sleep(3)
         chunks = [">>> " + response_text[i:i+1995] for i in range(0, len(response_text), 1995)]
         for chunk in chunks:
             await asyncio.sleep(3)
