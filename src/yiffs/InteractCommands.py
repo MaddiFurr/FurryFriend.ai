@@ -6,6 +6,8 @@ from .interact.pet import pet
 from .interact.hug import hug
 from .interact.kiss import kiss
 
+# eventually go back and fix this to be in one python file you fucking goober
+
 class interact(apc.Group):
     """Manage general commands"""
     def __init__(self, bot: discord.ext.commands.Bot):

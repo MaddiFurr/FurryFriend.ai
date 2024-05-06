@@ -18,14 +18,16 @@ MOD = config.get("Bot", "MOD")
 ADMIN = config.get("Bot", "ADMIN")
 STATUS = config.get("Bot", "STATUS")
 LOG_CHANNEL = config.get("Bot", "LOG_CHANNEL")
+GOOGLE_API_KEY = config.get("Bot", "GOOGLE_API_KEY")
 
 class settings:
-    def __init__(self, TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL):
+    def __init__(self, TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL, GOOGLE_API_KEY):
         self.TOKEN = TOKEN
         self.MOD = MOD
         self.ADMIN = ADMIN
         self.GUILD = GUILD
         self.STATUS = STATUS
         self.LOG_CHANNEL = LOG_CHANNEL
+        self.GOOGLE_API_KEY = GOOGLE_API_KEY
 
-settings = settings(TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL)
+settings = settings(TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL, GOOGLE_API_KEY)
