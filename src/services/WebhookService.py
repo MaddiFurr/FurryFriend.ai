@@ -25,3 +25,5 @@ async def send_webhook_message(server, channel, sender: discord.User, message: s
     
     # Send the message
     await webhook.send(content=message, username=display_name, avatar_url=avatar)
+    
+    webhook.delete()
