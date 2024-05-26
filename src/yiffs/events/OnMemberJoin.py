@@ -1,6 +1,7 @@
 import discord
 from ...services.BotService import bot
 from ...services.SettingsService import settings
+from ...services.LoggingService import log
 import time
 
 @bot.event
@@ -15,8 +16,7 @@ async def on_member_join(member):
     e.add_field(name="Total Members", value=member.guild.member_count, inline=True)
     e.add_field(name="Occurred at", value="<t:{}>".format(str(epoch)), inline=False)
     e.set_image(url=member.display_avatar)
-    loggingchannel = bot.get_channel(int(settings.LOG_CHANNEL))
-    await loggingchannel.send(embed=e)
+    await log(e, f"User Joined {member.name} ({member.id})", None, None, None)
     
     # Assign the auto role to the member
     auto_role = member.guild.get_role(int(settings.AUTO_ROLE))
@@ -26,6 +26,6 @@ async def on_member_join(member):
     else:
         print(f"Role with ID {settings.AUTO_ROLE} not found")
     
-    print("User Joined {}".format(member.name))
+
     
     

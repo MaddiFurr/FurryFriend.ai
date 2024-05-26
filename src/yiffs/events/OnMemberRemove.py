@@ -1,6 +1,7 @@
 import discord
 from ...services.BotService import bot
 from ...services.SettingsService import settings
+from ...services.LoggingService import log
 import time
 
 @bot.event
@@ -15,7 +16,5 @@ async def on_member_remove(member):
     e.add_field(name="Total Members", value=member.guild.member_count, inline=True)
     e.add_field(name="Occurred at", value="<t:{}>".format(str(epoch)), inline=False)
     e.set_image(url=member.display_avatar)
-    loggingchannel = bot.get_channel(int(settings.LOG_CHANNEL))
-    await loggingchannel.send(embed=e)
-    print("User left {}".format(member.name))
+    await log(e, f"User Left {member.name} ({member.id})", None, None, None)
     

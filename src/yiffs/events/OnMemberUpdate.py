@@ -1,6 +1,7 @@
 import discord
 from ...services.BotService import bot
 from ...services.SettingsService import settings
+from ...services.LoggingService import log
 import time
 
 @bot.event
@@ -15,10 +16,7 @@ async def on_member_update(before, after):
         e.add_field(name="Nickname Before", value=before.display_name, inline=True)
         e.add_field(name="Nickname After", value=after.display_name, inline=True)
         e.add_field(name="Occurred at", value="<t:{}>".format(str(epoch)), inline=False)
-        loggingchannel = bot.get_channel(int(settings.LOG_CHANNEL))
-        await loggingchannel.send(embed=e)
-        print("User Nickname Updated {} - > {}".format(before.name, after.name))
-
+        await log(e, f"User Nickname Updated {before.nick} - > {after.nick} ({before.name})", "Nickname Updated", before, None,)
         return
     
     # Check if the user's roles have changed
@@ -33,8 +31,5 @@ async def on_member_update(before, after):
         e.add_field(name="Roles Before", value=before_roles, inline=True)  # Use role names
         e.add_field(name="Roles After", value=after_roles, inline=True)  # Use role names
         e.add_field(name="Occurred at", value="<t:{}>".format(str(epoch)), inline=False)
-        loggingchannel = bot.get_channel(int(settings.LOG_CHANNEL))
-        await loggingchannel.send(embed=e)
-        print("User Roles Updated {} - > {}".format(before_roles, after_roles))
-
+        await log(e, f"User Roles Updated {before_roles} - > {after_roles}", "Roles Updated", before, None)
         return

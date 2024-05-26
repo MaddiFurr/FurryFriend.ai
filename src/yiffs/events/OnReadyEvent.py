@@ -1,6 +1,7 @@
 import discord
 from ...services.BotService import bot
 from ...services.SettingsService import settings
+from ...services.LoggingService import log
 
 
 guild = discord.Object(id=settings.GUILD)
@@ -12,6 +13,4 @@ async def on_ready():
     await bot.tree.sync(guild=guild)
     permissions = discord.Intents.all()
     url = f"https://discord.com/oauth2/authorize?client_id={bot.user.id}&permissions={permissions.value}&scope=bot"
-    print(f"Bot is ready! Now in {len(bot.guilds)} guilds.")
-    for server in bot.guilds:
-        print(f"Guild name: {server.name}")
+    await log(None, f"Bot is ready! Now in {len(bot.guilds)} guilds. [Invite me!]({url})", None, None, None)

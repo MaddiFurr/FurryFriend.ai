@@ -4,6 +4,7 @@ import asyncio
 from ...services.BotService import bot
 from ...services.PermissionChecker import permission_checker
 from ...services.GeminiService import single
+from ...services.LoggingService import log
 
 async def single_prompt(interaction: discord.Interaction, prompt: str):
     """Prompt the AI!"""
@@ -25,6 +26,5 @@ async def single_prompt(interaction: discord.Interaction, prompt: str):
         for chunk in chunks:
             await asyncio.sleep(3)
             await channel.send(chunk)
-    
-    print("{} ({}) has prompted an AI call (The response was {} characters).\nPrompt: {}\nResponse: {}".format(interaction.user.name,interaction.user.id,str(len(response_text)),prompt,AI_RESPONSE.text))
+    await log(None, "{} ({}) has prompted an AI call (The response was {} characters).\nPrompt: {}\nResponse: {}".format(interaction.user.name,interaction.user.id,str(len(response_text)),prompt,AI_RESPONSE.text), "/ai single", interaction.user, interaction.channel)
     return

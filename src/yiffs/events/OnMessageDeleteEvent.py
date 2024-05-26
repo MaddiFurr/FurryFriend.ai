@@ -1,6 +1,7 @@
 import discord
 from ...services.BotService import bot
 from ...services.SettingsService import settings
+from ...services.LoggingService import log
 import time
 
 ## On a message delete event, send an embed to the log channel
@@ -21,7 +22,6 @@ async def on_message_delete(message):
     e.add_field(name="Author", value=message.author.mention, inline=True)
     e.add_field(name="Message", value=message.content, inline=True)
     e.add_field(name="Occurred at", value="<t:{}>".format(str(epoch)), inline=False)
-    loggingchannel = bot.get_channel(int(settings.LOG_CHANNEL))
-    await loggingchannel.send(embed=e)
-    print(f"Message deleted in {message.channel.mention} || {message.author.mention}: {message.content}")
+    await log(e, f"Message deleted in {message.channel.mention} || {message.author.mention}: {message.content}", "Message Deleted", message.author, message.channel)
+
     
