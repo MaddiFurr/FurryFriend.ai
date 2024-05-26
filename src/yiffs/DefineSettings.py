@@ -2,7 +2,7 @@ import discord
 from discord import app_commands as apc
 from ..services.BotService import bot
 from .settings.botstatus import botstatus
-from .settings.setjoinrole import setjoinrole
+#from .settings.setjoinrole import setjoinrole
 
 class settings(apc.Group):
     """Manage general commands"""
