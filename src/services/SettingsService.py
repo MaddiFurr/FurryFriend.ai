@@ -7,7 +7,7 @@ import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Construct the path to the bot.conf file
-conf_path = os.path.join(dir_path, '../../bot.conf')
+conf_path = os.path.join(dir_path, '../../configs/bot.conf')
 
 # Load bot configuration from bot.conf
 config = configparser.ConfigParser()
