@@ -17,5 +17,15 @@ async def on_member_join(member):
     e.set_image(url=member.display_avatar)
     loggingchannel = bot.get_channel(int(settings.LOG_CHANNEL))
     await loggingchannel.send(embed=e)
+    
+    # Assign the auto role to the member
+    auto_role = member.guild.get_role(int(settings.AUTO_ROLE))
+    if auto_role is not None:
+        await member.add_roles(auto_role)
+        print(f"Role {auto_role.name} assigned to {member.name}")
+    else:
+        print(f"Role with ID {settings.AUTO_ROLE} not found")
+    
     print("User Joined {}".format(member.name))
+    
     

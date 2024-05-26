@@ -4,7 +4,6 @@ from ..services.BotService import bot
 from ..services.PermissionChecker import permission_checker
 from .info.hello import hello
 from .info.version import version
-from .info.botstatus import botstatus
 
 class info(apc.Group):
     """Manage general commands"""
@@ -24,9 +23,5 @@ class info(apc.Group):
         """Tells you what version of the bot software is running."""
         await version(interaction)
     
-    # Change the bot's status
-    @apc.command()
-    async def botstatus(self, interaction: discord.Interaction, newstatus: str):
-        """Change the bot's status"""
-        await botstatus(interaction, newstatus)
+    
         

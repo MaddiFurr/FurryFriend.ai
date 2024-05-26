@@ -1,8 +1,8 @@
 import discord
 from discord import app_commands as apc
 from ..services.BotService import bot
-from ..services.PermissionChecker import permission_checker
-from .settings.logchannel import update_logchannel
+from .settings.botstatus import botstatus
+from .settings.setjoinrole import setjoinrole
 
 class settings(apc.Group):
     """Manage general commands"""
@@ -10,10 +10,14 @@ class settings(apc.Group):
         super().__init__()
         self.bot = bot
     
-    # Say hello to the bot!
-    #@apc.command()
-    #async def logchannel(self, interaction: discord.Interaction, channel: discord.TextChannel):
-    #    """Change the guild's log channel"""
-    #    user = interaction.user
-    #    await update_logchannel(interaction, user, channel)
+    # Change the bot's status
+    @apc.command()
+    async def botstatus(self, interaction: discord.Interaction, newstatus: str):
+        """Change the bot's status"""
+        await botstatus(interaction, newstatus)
         
+    # Set the role assigned to users upon joining
+    #@apc.command()
+    #async def setjoinrole(self, interaction: discord.Interaction, newrole: str):
+    #    """Set the role assigned to users upon joining"""
+    #    await setjoinrole(interaction, newrole)
