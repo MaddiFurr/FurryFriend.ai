@@ -22,6 +22,6 @@ async def on_message_delete(message):
     e.add_field(name="Author", value=message.author.mention, inline=True)
     e.add_field(name="Message", value=message.content, inline=True)
     e.add_field(name="Occurred at", value="<t:{}>".format(str(epoch)), inline=False)
-    await log(e, f"Message deleted in {message.channel.mention} || {message.author.mention}: {message.content}", "Message Deleted", message.author, message.channel)
+    await log(e, f"Message deleted in {message.channel.mention} || {message.author.mention}: {message.content}", "on_message_delete", message.author, message.channel)
 
     

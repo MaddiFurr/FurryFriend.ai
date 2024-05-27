@@ -17,3 +17,5 @@ async def on_message(message):
         await message.delete()
         await log(f"Replaced {message.content} with TwittPR Link", None, None, message.channel)
     await bot.process_commands(message)
+    
+    await log(None, None, "on_message", message.author, message.channel)

@@ -20,9 +20,11 @@ STATUS = config.get("Bot", "STATUS")
 LOG_CHANNEL = config.get("Bot", "LOG_CHANNEL")
 GOOGLE_API_KEY = config.get("Bot", "GOOGLE_API_KEY")
 AUTO_ROLE = config.get("Bot", "AUTO_ROLE")
+MONGO_URI = config.get("Bot", "MONGO_URI")
+MONGO_DB = config.get("Bot", "MONGO_DB")
 
 class settings:
-    def __init__(self, TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL, GOOGLE_API_KEY, AUTO_ROLE):
+    def __init__(self, TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL, GOOGLE_API_KEY, AUTO_ROLE, MONGO_URI, MONGO_DB):
         self.TOKEN = TOKEN
         self.MOD = MOD
         self.ADMIN = ADMIN
@@ -31,5 +33,7 @@ class settings:
         self.LOG_CHANNEL = LOG_CHANNEL
         self.GOOGLE_API_KEY = GOOGLE_API_KEY
         self.AUTO_ROLE = AUTO_ROLE
+        self.MONGO_URI = MONGO_URI
+        self.MONGO_DB = MONGO_DB
 
-settings = settings(TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL, GOOGLE_API_KEY, AUTO_ROLE)
+settings = settings(TOKEN, MOD, ADMIN, GUILD, STATUS, LOG_CHANNEL, GOOGLE_API_KEY, AUTO_ROLE, MONGO_URI, MONGO_DB)

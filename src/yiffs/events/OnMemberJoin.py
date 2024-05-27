@@ -2,6 +2,7 @@ import discord
 from ...services.BotService import bot
 from ...services.SettingsService import settings
 from ...services.LoggingService import log
+from ...services.DBService import add_new_user
 import time
 
 @bot.event
@@ -17,7 +18,7 @@ async def on_member_join(member):
     e.add_field(name="Occurred at", value="<t:{}>".format(str(epoch)), inline=False)
     e.set_image(url=member.display_avatar)
     await log(e, f"User Joined {member.name} ({member.id})", None, None, None)
-    
+
     # Assign the auto role to the member
     auto_role = member.guild.get_role(int(settings.AUTO_ROLE))
     if auto_role is not None:
@@ -25,6 +26,9 @@ async def on_member_join(member):
         print(f"Role {auto_role.name} assigned to {member.name}")
     else:
         print(f"Role with ID {settings.AUTO_ROLE} not found")
+    
+    # Add the user to the database
+    await add_new_user(member.id, member.name, member.nick, member.created_at, member.joined_at)
     
 
     

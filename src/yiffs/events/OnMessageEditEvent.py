@@ -24,5 +24,5 @@ async def on_message_edit(message_before, message_after):
     e.add_field(name="After Edit", value=message_after.content, inline=True)
     e.add_field(name="Jump to Message", value=f"[Click Here]({message_before.jump_url})", inline=False)
     e.add_field(name="Occurred at", value="<t:{}>".format(str(epoch)), inline=False)
-    await log(e, f"Message edited in {message_before.channel.mention} || {message_before.author.mention}: {message_before.content} -> {message_after.content}", "Message Edited", message_before.author,message_before.channel)
+    await log(e, f"Message edited in {message_before.channel.mention} || {message_before.author.mention}: {message_before.content} -> {message_after.content}", "on_message_edit", message_before.author,message_before.channel)
     

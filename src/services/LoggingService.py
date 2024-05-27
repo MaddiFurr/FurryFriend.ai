@@ -1,11 +1,17 @@
 import discord
 from .BotService import bot
 from .SettingsService import settings
+from .DBService import write_user_data
+from .DBService import write_server_data
+from .DBService import increment_user_action
+from .DBService import update_username
+from .DBService import increment_channel_action
+from .DBService import update_channel_name
 import os
 import time
 
 
-async def log(message: discord.Embed = None, logfile: str = None, command: str = None, user: discord.user = None, channel: discord.channel = None):
+async def log(message: discord.Embed = None, logfile: str = None, command: str = None, user: discord.user = None, channel: discord.channel = None,):
     if message is not None:
         loggingchannel = bot.get_channel(int(settings.LOG_CHANNEL))
         await loggingchannel.send(embed=message)
@@ -36,11 +42,9 @@ async def log(message: discord.Embed = None, logfile: str = None, command: str =
         
         print(log_entry)
         
-        if command is not None:
-            print(f"COMMAND LOG: {command}")
-        
-        if user is not None:
-            print(f"USER LOG: {user.name} ({user.id})")
-            
+    if command is not None:
+        await increment_user_action(user.id, command)
+        await update_username(user.id, user.name, user.nick)
         if channel is not None:
-            print(f"CHANNEL LOG: {channel.name} ({channel.id})")
+            await increment_channel_action(channel.id, command)
+            await update_channel_name(channel.id, channel.name)
