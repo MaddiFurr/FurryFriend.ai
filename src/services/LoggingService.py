@@ -11,7 +11,7 @@ import os
 import time
 
 
-async def log(message: discord.Embed = None, logfile: str = None, command: str = None, user: discord.user = None, channel: discord.channel = None,):
+async def log(message: discord.Embed = None, logfile: str = None, command: str = None, user: discord.user = None, channel: discord.channel = None, number: int = 1):
     if message is not None:
         loggingchannel = bot.get_channel(int(settings.LOG_CHANNEL))
         await loggingchannel.send(embed=message)
@@ -41,10 +41,16 @@ async def log(message: discord.Embed = None, logfile: str = None, command: str =
             f.write(log_entry + "\n")
         
         print(log_entry)
-        
+    
+    
+    
     if command is not None:
-        await increment_user_action(user.id, command)
-        await update_username(user.id, user.name, user.nick)
+        await increment_user_action(user.id, command, number)
+        if user.nick is None:
+            nick = None
+        else:
+            nick = user.nick
+        await update_username(user.id, user.name, nick)
         if channel is not None:
-            await increment_channel_action(channel.id, command)
+            await increment_channel_action(channel.id, command, number)
             await update_channel_name(channel.id, channel.name)

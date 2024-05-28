@@ -12,4 +12,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Specify the command to run your application
-CMD [ "python", "__main__.py" ]  # Replace with your actual script name
+CMD [ "python", "-u", "__main__.py" ]

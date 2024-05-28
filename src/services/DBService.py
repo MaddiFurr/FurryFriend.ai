@@ -39,11 +39,11 @@ async def write_server_data(server_id: int, data: dict):
     result = collection.update_one({'_id': server_id}, {'$set': data}, upsert=True)
     return result
 
-async def increment_user_action(user_id: int, command_name: str):
+async def increment_user_action(user_id: int, command_name: str, number: int = 1):
     """Increment the usage count for a specific action for a specific user"""
     db = await get_db()
     collection = db['users']
-    result = collection.update_one({'_id': user_id}, {'$inc': {f'action.{command_name}': 1}}, upsert=True)
+    result = collection.update_one({'_id': user_id}, {'$inc': {f'action.{command_name}': number}}, upsert=True)
     return result
 
 async def update_username(user_id: int, name: str, nickname: str):
@@ -53,13 +53,13 @@ async def update_username(user_id: int, name: str, nickname: str):
     result = collection.update_one({'_id': user_id}, {'$set': {'username': name, 'nickname': nickname}}, upsert=True)
     return result
 
-async def increment_channel_action(channel_id: int, command_name: str):
+async def increment_channel_action(channel_id: int, command_name: str, number: int = 1):
     """Increment the usage count for a specific action for a specific channel"""
     db = await get_db()
     collection = db['channels']  # Use a 'channels' collection
-    result = collection.update_one({'_id': channel_id, f'actions.{command_name}': {'$exists': True}}, {'$inc': {f'actions.{command_name}': 1}})
+    result = collection.update_one({'_id': channel_id, f'actions.{command_name}': {'$exists': True}}, {'$inc': {f'actions.{command_name}': number}})
     if result.matched_count == 0:
-        result = collection.update_one({'_id': channel_id}, {'$set': {f'actions.{command_name}': 1}}, upsert=True)
+        result = collection.update_one({'_id': channel_id}, {'$set': {f'actions.{command_name}': number}}, upsert=True)
     return result
 
 async def update_channel_name(channel_id: int, name: str):
