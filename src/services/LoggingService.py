@@ -12,6 +12,10 @@ import time
 
 
 async def log(message: discord.Embed = None, logfile: str = None, command: str = None, user: discord.user = None, channel: discord.channel = None, number: int = 1):
+    # Don't log if the user is a bot
+    if command == "on_message" and user.bot:
+        return
+    
     if message is not None:
         loggingchannel = bot.get_channel(int(settings.LOG_CHANNEL))
         await loggingchannel.send(embed=message)
