@@ -49,12 +49,12 @@ async def log(message: discord.Embed = None, logfile: str = None, command: str =
     
     
     if command is not None:
-        await increment_user_action(user.id, command, number)
+        #await increment_user_action(user, command, channel, number)
         if user.nick is None:
             nick = None
         else:
             nick = user.nick
         await update_username(user.id, user.name, nick)
         if channel is not None:
-            await increment_channel_action(channel.id, command, number)
             await update_channel_name(channel.id, channel.name)
+            await increment_channel_action(channel, command, user, number)
