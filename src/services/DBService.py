@@ -61,8 +61,8 @@ async def increment_channel_action(channel: discord.channel, command_name: str, 
     result = collection.update_one({'_id': channel.id}, {'$set': {f'action_by_user.{user.id}.username': user.name}}, upsert=True)
     result = collection.update_one({'_id': channel.id, f'action_by_user.{user.id}.{command_name}': {'$exists': True}}, {'$inc': {f'action_by_user.{user.id}.{command_name}': number}})
     if result.matched_count == 0:
-        result = collection.update_one({'_id': channel.id}, {'$set': {f'total_actions.{command_name}': number}}, upsert=True)
-        result = collection.update_one({'_id': channel.id}, {'$set': {f'action_by_user.{user.id}.{command_name}': number}}, upsert=True)
+        result = collection.update_one({'_id': channel.id}, {'$inc': {f'total_actions.{command_name}': number}}, upsert=True)
+        result = collection.update_one({'_id': channel.id}, {'$inc': {f'action_by_user.{user.id}.{command_name}': number}}, upsert=True)
     return result
 
 async def update_channel_name(channel_id: int, name: str):
