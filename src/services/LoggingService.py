@@ -43,7 +43,9 @@ async def log(message: discord.Embed = None, logfile: str = None, command: str =
             # Add the current time to the logfile variable
             log_entry = time.strftime("[%H:%M:%S]: ", current_time) + logfile
             f.write(log_entry + "\n")
-        
+            if settings.CONSOLE_CHANNEL is not None:
+                consolechannel = bot.get_channel(int(settings.CONSOLE_CHANNEL))
+                await consolechannel.send("```" + log_entry + "```")
         print(log_entry)
     
     

@@ -11,11 +11,11 @@ async def on_message(message):
     if "https://twitter.com" in message.content:
         await send_webhook_message(message.guild, message.channel, message.author, message.content.replace("https://twitter.com/","https://twittpr.com/"))
         await message.delete()
-        await log(f"Replaced {message.content} with TwittPR Link", None, None, message.channel)
+        await log(None, f"Replaced {message.content} with TwittPR Link", None, None, message.channel)
     if "https://x.com/" in message.content:
         await send_webhook_message(message.guild, message.channel, message.author, message.content.replace("https://x.com/","https://twittpr.com/"))
         await message.delete()
-        await log(f"Replaced {message.content} with TwittPR Link", None, None, message.channel)
+        await log(None, f"Replaced {message.content} with TwittPR Link", None, None, message.channel)
     await bot.process_commands(message)
     
     await log(None, None, "on_message", message.author, message.channel)
