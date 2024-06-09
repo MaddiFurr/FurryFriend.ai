@@ -103,3 +103,20 @@ async def add_all_users(guild):
                 "join_date": join_date,
                 "creation_date": creation_date
             }})
+            
+async def get_user_field(user_id: int, field: str):
+    """Fetch a specified field of a given user from the database."""
+    db = await get_db()
+    user_collection = db['users']
+    user = user_collection.find_one({"_id": user_id})
+    if user is not None and field in user:
+        return user[field]
+    else:
+        return None
+
+async def update_user_field(user_id: int, field: str, new_value):
+    """Update a specified field of a given user in the database. If the user does not exist, create it."""
+    db = await get_db()
+    user_collection = db['users']
+    result = user_collection.update_one({"_id": user_id}, {"$set": {field: new_value}}, upsert=True)
+    return result.modified_count > 0

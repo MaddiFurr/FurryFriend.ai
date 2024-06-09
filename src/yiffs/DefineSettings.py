@@ -1,6 +1,7 @@
 import discord
 from discord import app_commands as apc
 from ..services.BotService import bot
+from ..services.ModActionService import create_mod_action
 from .settings.botstatus import botstatus
 from .settings.dbupdate import dbupdate
 #from .settings.setjoinrole import setjoinrole
@@ -22,3 +23,9 @@ class settings(apc.Group):
     async def dbupdate(self, interaction: discord.Interaction):
         """Add all users in a guild to the database"""
         await dbupdate(interaction)
+    
+    @apc.command()
+    async def modaction(self, interaction: discord.Interaction, data: str, role: str):
+        """Create a mod action"""
+        print(f'We got to the await: {data}, {role}')
+        await create_mod_action(data, role)
