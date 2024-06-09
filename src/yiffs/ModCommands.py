@@ -16,7 +16,7 @@ class mod(apc.Group):
     
     # The delete message
     @apc.command()
-    async def delete(self, interaction: discord.Interaction, message: str):
+    async def delete(self, interaction: discord.Interaction, message: str, reason: str):
         """Pet a user!"""
         await delete_message(interaction, message)
 
