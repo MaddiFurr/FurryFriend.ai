@@ -57,4 +57,3 @@ towelhead&:A offensive word used to describe a [custom] of someone of [arab] [de
 tranny&:In mechanics, a [vehicle's] [transmission].
 wetback&:Another name for [Latin] [Americans] living in [the United States]. A racial slur.
 zoophilia&:An intense [sexual attraction] to an animal.
-test&:A test word used to verify the integrity of things generally speaking
