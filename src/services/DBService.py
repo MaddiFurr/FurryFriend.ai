@@ -109,10 +109,20 @@ async def get_user_field(user_id: int, field: str):
     db = await get_db()
     user_collection = db['users']
     user = user_collection.find_one({"_id": user_id})
-    if user is not None and field in user:
-        return user[field]
-    else:
-        return None
+
+    # Split the field by '.' to get the nested fields
+    fields = field.split('.')
+
+    # Iterate over the nested fields
+    for f in fields:
+        # If the current field exists in the user document, update the user document to the value of the current field
+        if user is not None and f in user:
+            user = user[f]
+        else:
+            return None
+
+    # Return the value of the final field
+    return user
 
 async def update_user_field(user_id: int, field: str, new_value):
     """Update a specified field of a given user in the database. If the user does not exist, create it."""
