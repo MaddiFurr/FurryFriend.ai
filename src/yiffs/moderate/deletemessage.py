@@ -20,7 +20,18 @@ async def delete_message(interaction: discord.Interaction, message_id: str, reas
         return
 
     # Send a message to the author of the message
-    await message.author.send(f"Your message in {message.channel.mention} was deleted.\n\nReason: {reason}\n\nIf you have any questions, please contact the moderators using Reference ID: ```{message.channel.id}:{message.id}```")
+    dme = discord.Embed(title="Message Deleted", description=f"Your message in {message.channel.mention} was deleted.", color=0xe74c3c)
+    dme.add_field(name="Message", value=message.content, inline=False)
+    dme.add_field(name="Reason", value=reason, inline=False)
+    dme.add_field(name="Occurred at", value="<t:{}>".format(str(int(message.created_at.timestamp()))), inline=False)
+    dme.add_field(name="Reference ID", value=f"{message.channel.id}:{message.id}", inline=False)
+    dme.set_footer(text="If you have any questions or concerns, please contact the moderators with the Reference ID above.")
+    
+    try:
+        await message.author.send(embed=dme)
+    except discord.Forbidden:
+        await interaction.response.send_message("Message deleted, but I couldn't DM the user to notify them.", ephemeral=True)
+        return
 
     e = discord.Embed(title="Message Deleted By Mod", description=f"Message deleted in {message.channel.mention}", color=0xe74c3c)
     e.add_field(name="Action Severity", value="2 - Low/Medium", inline=False)
