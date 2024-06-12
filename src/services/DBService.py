@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from .BotService import bot
 from .SettingsService import settings
 from datetime import datetime
+import traceback
 
 
 async def get_db():
@@ -130,3 +131,78 @@ async def update_user_field(user_id: int, field: str, new_value):
     user_collection = db['users']
     result = user_collection.update_one({"_id": user_id}, {"$set": {field: new_value}}, upsert=True)
     return result.modified_count > 0
+
+async def get_channel_field(channel: discord.channel, field: str):
+    """Fetch a specified field of a given channel from the database."""
+    db = await get_db()
+    channel_collection = db['channels']
+    channel_doc = channel_collection.find_one({"_id": channel.id})
+
+    # Split the field by '.' to get the nested fields
+    fields = field.split('.')
+
+    # Iterate over the nested fields
+    for f in fields:
+        # If the current field exists in the channel document, update the channel document to the value of the current field
+        if channel_doc is not None and f in channel_doc:
+            channel_doc = channel_doc[f]
+        else:
+            return None
+
+    # Return the value of the final field
+    return channel_doc
+
+async def update_channel_field(channel: discord.channel, field: str, value):
+    """Update a specified field of a given channel in the database."""
+    db = await get_db()
+    channel_collection = db['channels']
+
+    # Split the field by '.' to get the nested fields
+    fields = field.split('.')
+    update_field = fields.pop()
+
+    # Iterate over the nested fields to get the subdocument to update
+    subdoc = channel_collection.find_one({"_id": channel.id})
+    for f in fields:
+        if subdoc is not None and f in subdoc:
+            subdoc = subdoc[f]
+        else:
+            return None
+
+    # Update the specified field in the subdocument
+    if subdoc is not None and update_field in subdoc:
+        subdoc[update_field] = value
+        channel_collection.update_one({"_id": channel.id}, {"$set": {field: value}})
+        
+
+async def add_react_role(guild_id: int, message_id: int, emoji: str, role_id: int):
+    """Add a react role to the database."""
+    db = await get_db()
+    react_roles_collection = db['react_roles']
+    react_roles_collection.insert_one({
+        "guild_id": int(guild_id),
+        "message_id": int(message_id),
+        "emoji": emoji,
+        "role_id": role_id
+    })
+
+async def remove_react_role(guild_id: int, message_id: int, emoji: str):
+    """Remove a react role from the database."""
+    db = await get_db()
+    react_roles_collection = db['react_roles']
+    react_roles_collection.delete_one({
+        "guild_id": int(guild_id),
+        "message_id": int(message_id),
+        "emoji": emoji
+    })
+
+async def check_react_role(guild_id: int, message_id: int, emoji: str = None):
+    """Check if a react role exists in the database."""
+    db = await get_db()
+    react_roles_collection = db['react_roles']
+    react_role = react_roles_collection.find_one({
+        "guild_id": guild_id,
+        "message_id": message_id,
+        "emoji": emoji
+    })
+    return react_role

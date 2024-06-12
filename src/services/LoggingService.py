@@ -39,7 +39,7 @@ async def log(message: discord.Embed = None, logfile: str = None, command: str =
             open(log_file_path, 'w').close()
 
         # Append the logfile variable to the log file
-        with open(log_file_path, 'a') as f:
+        with open(log_file_path, 'a', encoding="utf-8") as f:
             # Add the current time to the logfile variable
             log_entry = time.strftime("[%H:%M:%S]: ", current_time) + logfile
             f.write(log_entry + "\n")
