@@ -16,7 +16,8 @@ class ModActionService(discord.ui.View):
     def __init__(self):
         super().__init__()
         self.value = None
-        
+
+    # Non-Action        
     @discord.ui.button(label='Non-Action', style=discord.ButtonStyle.green)
     async def non_action(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.value = 'non-action'
@@ -60,6 +61,7 @@ class ModActionService(discord.ui.View):
         
         self.stop()
 
+    # Delete Message & Inform User
     @discord.ui.button(label='Delete Message', style=discord.ButtonStyle.danger)
     async def delete_message(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.value = 'delete-message'
@@ -84,7 +86,13 @@ class ModActionService(discord.ui.View):
                 return
             finmessage = await channel.fetch_message(message_id)
             try:
-                await finmessage.author.send(f"Your message in {channel.mention} was deleted.\n\nIf you have any questions, please contact the moderators using Reference ID: ```{channel_id}:{message_id}```")
+                #await finmessage.author.send(f"Your message in {channel.mention} was deleted.\n\nIf you have any questions, please contact the moderators using Reference ID: ```{channel_id}:{message_id}```")
+                # Send a message to the author of the message
+                dme = discord.Embed(title="Message Deleted", description=f"Your message in {channel.mention} was deleted.", color=0xe74c3c)
+                dme.add_field(name="Message", value=finmessage.content, inline=False)
+                dme.add_field(name="Reference ID", value=f"{finmessage.channel.id}:{finmessage.id}", inline=False)
+                dme.set_footer(text="If you have any questions or concerns, please contact the moderators with the Reference ID above.")
+                await finmessage.author.send(embed=dme)
             except Forbidden:
                 print(f"Bot does not have permission to DM user {finmessage.author.id}")
             await finmessage.delete()
@@ -115,7 +123,7 @@ class ModActionService(discord.ui.View):
         await update_user_field(interaction.user.id, "mod_actions.delete_message", setactions)
         self.stop()
 
-
+    # Time Out User
     @discord.ui.button(label='Time Out User', style=discord.ButtonStyle.danger)
     async def time_out_user(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.value = 'time-out-user'
@@ -209,6 +217,7 @@ class ModActionService(discord.ui.View):
         
         self.stop()
 
+    # Kick User
     @discord.ui.button(label='Kick User', style=discord.ButtonStyle.danger)
     async def kick_user(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.value = 'kick-user'
@@ -262,6 +271,7 @@ class ModActionService(discord.ui.View):
         
         self.stop()
 
+    # Ban User
     @discord.ui.button(label='Ban User', style=discord.ButtonStyle.danger)
     async def ban_user(self, interaction: discord.Interaction, button: discord.ui.Button):
         self.value = 'ban-user'

@@ -45,11 +45,9 @@ async def delete_message(interaction: discord.Interaction, message_id: str, reas
     await log(e,f"Message deleted by {interaction.user.name} ({interaction.user.id}) on user {message.author.name} ({message.author.id}) in {message.channel.name} ({message.channel.id}) for reason: {reason}",None,message.author,message.channel)
     
     actions = await get_user_field(interaction.user.id, "mod_actions.delete_message")
-    print(actions)
     if actions is None:
         actions = 0
     actions = actions + 1
-    print(actions)
     await update_user_field(interaction.user.id, "mod_actions.delete_message", actions)
     
     # Delete the message
